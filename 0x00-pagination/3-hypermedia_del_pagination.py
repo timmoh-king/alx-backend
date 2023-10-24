@@ -61,9 +61,9 @@ class Server:
                 break
 
         page_information = {
-                "index" : index,
-                "next_index" : next_index,
-                "page_size" : len(page_data),
+                "index": index,
+                "next_index": next_index,
+                "page_size": len(page_data),
                 "data": page_data
             }
 
