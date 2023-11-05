@@ -6,12 +6,15 @@
 
 BaseCaching = __import__('base_caching').BaseCaching
 
+from collections import OrderedDict
+
 
 class LIFOCache(BaseCaching):
     """class LIFOCache"""
     def __init__(self):
         """declare class constraints and variables"""
         super().__init__()
+        self.cache_data = OrderedDict()
 
     def put(self, key, item):
         """
@@ -20,8 +23,8 @@ class LIFOCache(BaseCaching):
         """
         if key is None or item is None:
             return
-        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            discarded = self.cache_data.popitem()
+        if len(self.cache_data) + 1 > BaseCaching.MAX_ITEMS:
+            discarded = self.cache_data.popitem(True)
             print(f"DISCARD: {discarded[0]}")
         self.cache_data[key] = item
 
