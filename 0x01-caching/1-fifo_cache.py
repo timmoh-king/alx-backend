@@ -4,7 +4,7 @@
     Create a cls FIFOCache that inherits from BaseCaching as a caching system:
 """
 
-BaseCaching = __import__('base_caching').BaseCaching
+from base_caching import BaseCaching
 
 from collections import OrderedDict
 
