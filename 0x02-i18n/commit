@@ -1,0 +1,1 @@
+git add -A && git commit -m "0x02-i18n folder setup" && git push
