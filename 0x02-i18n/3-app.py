@@ -32,7 +32,10 @@ def get_locale() -> str:
 @app.route('/')
 def index() -> str:
     """render the 1-index.html page once the route is given"""
-    return render_template('3-index.html')
+    return render_template(
+            '3-index.html',
+            title = _('home_title'),
+            header = _('home_header'))
 
 
 if __name__ == '__main__':
