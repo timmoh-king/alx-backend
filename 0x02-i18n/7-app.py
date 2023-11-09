@@ -5,7 +5,8 @@
     preferred local if it is supported.
 """
 
-from flask import Flask, render_template, request, g
+import pytz
+from flask import Flask, render_template, request
 from flask_babel import Babel
 from typing import Optional, Dict
 
@@ -64,10 +65,24 @@ def get_locale() -> str:
     return request.accept_languages.best_match(app.config["LANGUAGES"])
 
 
+@babel.timezoneselector
+def get_timezone() -> str:
+    """
+        The logic should be the same as get_locale:
+    """
+    timezone = request.args.get('timezone', '').strip()
+    if not timezone and g.user:
+        timezone = g.user['timezone']
+    try:
+        return pytz.timezone(timezone).zone
+    except pytz.exceptions.UnknownTimeZoneError:
+        return app.config['BABEL_DEFAULT_TIMEZONE']
+
+
 @app.route('/')
 def index() -> str:
     """render the 1-index.html page once the route is given"""
-    return render_template('6-index.html')
+    return render_template('7-index.html')
 
 
 if __name__ == '__main__':
